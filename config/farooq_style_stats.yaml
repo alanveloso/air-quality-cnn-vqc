@@ -1,0 +1,58 @@
+# Features no estilo Farooq et al. (Scientific Reports 2024):
+#   pm25_{min,max,median,variance}
+#   temperature_{min,max,median,variance}
+# Calculadas com janela móvel causal de 24h na série horária de Beijing.
+# QSVM: StandardScaler → PCA(2) → MinMax [0,1] (pipeline do artigo).
+
+project:
+  name: farooq-style-stats
+  random_seed: 42
+
+data:
+  dataset_id: 501
+  station: Aotizhongxin
+  target_column: PM2.5
+  raw_dir: data/raw
+
+forecast:
+  horizon_hours: 24
+  extreme_percentile: 0.90
+
+features:
+  mode: farooq_stats
+  source_columns:
+    PM2.5: pm25
+    TEMP: temperature
+  stats: [min, max, median, variance]
+  rolling_window_hours: 24
+  rolling_min_periods: 12
+  ffill_limit_hours: 3
+  notes: "Farooq-style min/max/median/variance for PM2.5 and temperature (24h causal rolling)."
+
+split:
+  train_fraction: 0.60
+  validation_fraction: 0.20
+  test_fraction: 0.20
+
+sampling:
+  train_size: 80
+  validation_size: 40
+  test_size: 40
+
+# Clássicos usam as 8 stats; QSVM reduz a 2 PCs como no artigo
+pca_for_quantum: 2
+
+quantum_variants:
+  - id: Q_farooq_pipeline
+    angular_scaler: minmax_0_1
+    feature_map: ZZFeatureMap
+    reps: 1
+    entanglement: linear
+  - id: Q_farooq_0pi
+    angular_scaler: minmax_0_pi
+    feature_map: ZZFeatureMap
+    reps: 2
+    entanglement: linear
+
+paths:
+  artifacts_dir: artifacts/farooq_style

@@ -1,0 +1,56 @@
+# Experimento estilo Farooq: somente PM2.5 + TEMP (2 features, 2 qubits).
+# Mantém a tarefa temporal da PoC (extremo de PM2.5 em t+24h).
+
+project:
+  name: two-feature-pm25-temp
+  random_seed: 42
+
+data:
+  dataset_id: 501
+  station: Aotizhongxin
+  target_column: PM2.5
+  raw_dir: data/raw
+
+forecast:
+  horizon_hours: 24
+  extreme_percentile: 0.90
+
+features:
+  raw_columns:
+    - PM2.5
+    - TEMP
+  ffill_limit_hours: 3
+  # Sem lags/rolling/calendário — só as 2 variáveis contemporâneas
+  use_lags_rolling: false
+  add_calendar_features: false
+
+split:
+  train_fraction: 0.60
+  validation_fraction: 0.20
+  test_fraction: 0.20
+
+sampling:
+  # Versão enxuta (rápida). Para full: 500 / 150 / 200
+  train_size: 80
+  validation_size: 40
+  test_size: 40
+
+quantum_variants:
+  - id: Q_farooq_like
+    angular_scaler: minmax_0_1
+    feature_map: ZZFeatureMap
+    reps: 1
+    entanglement: linear
+  - id: Q_best_recipe
+    angular_scaler: minmax_0_pi
+    feature_map: ZZFeatureMap
+    reps: 2
+    entanglement: linear
+  - id: Q_std_only
+    angular_scaler: none
+    feature_map: ZZFeatureMap
+    reps: 1
+    entanglement: linear
+
+paths:
+  artifacts_dir: artifacts/two_feature

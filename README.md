@@ -1,54 +1,65 @@
-# QML Air Quality PoC (notebooks)
+# qml-air-quality
 
-PoC enxuta para comparar baselines clássicos e um QSVM na previsão (t+24h) de episódios extremos de PM2.5 na estação **Aotizhongxin** (Beijing Multi-Site Air Quality, UCI).
+PoC de **machine learning quântico** para previsão (t+24h) de episódios extremos de PM2.5 na estação **Aotizhongxin** (Beijing Multi-Site, UCI 501), com comparação clássico vs QSVM, ablação angular, notebook Kaggle e frontend **Névoa**.
 
-## Setup
+## Estrutura
+
+```text
+src/qml_air_quality/   # biblioteca (dados, features, modelos, ablação)
+config/                # poc.yaml, quantum_ablation.yaml, farooq_style_stats.yaml, …
+scripts/               # smoke_run, run_ablation, farooq/aqi experiments
+notebooks/             # PoC 01–04 + Kaggle (Farooq / ablação)
+frontend/              # Névoa — mapa das 12 estações + recomendações AQI
+artifacts/             # resultados leves (CSV/JSON/plots)
+kaggle/                # instruções Kaggle
+tests/
+```
+
+## Setup Python
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
-O dataset UCI 501 não está disponível via `ucimlrepo` import; o download usa o ZIP oficial do archive.ics.uci.edu (com cache em `data/raw/`).
-
-Smoke rápido (subset menor que o YAML):
+Dataset: download automático do ZIP UCI (cache em `data/raw/`).
 
 ```bash
 python scripts/smoke_run.py
+python scripts/run_ablation.py
+python scripts/run_aqi_bands_local.py --train-size 80 --test-size 40
 ```
 
-## Notebooks (nessa ordem)
+### Notebooks
 
-1. [`notebooks/01_prepare_data.ipynb`](notebooks/01_prepare_data.ipynb) — download, pipeline temporal, PCA, subset
-2. [`notebooks/02_classical_baselines.ipynb`](notebooks/02_classical_baselines.ipynb) — Dummy, LogReg, SVM linear/RBF
-3. [`notebooks/03_quantum_vs_classical.ipynb`](notebooks/03_quantum_vs_classical.ipynb) — QSVM + comparação (controle original)
-4. [`notebooks/04_quantum_ablation.ipynb`](notebooks/04_quantum_ablation.ipynb) — ablação angular Q01–Q10
+1. `notebooks/01_prepare_data.ipynb`
+2. `notebooks/02_classical_baselines.ipynb`
+3. `notebooks/03_quantum_vs_classical.ipynb`
+4. `notebooks/04_quantum_ablation.ipynb`
+5. `notebooks/kaggle_farooq_style_qsvm.ipynb` — independente para Kaggle (`MODE = small|medium|large`)
 
-Ou via script:
+Guia Kaggle: [`kaggle/README_KAGGLE.md`](kaggle/README_KAGGLE.md).
+
+## Frontend (Névoa)
 
 ```bash
-python scripts/run_ablation.py
+cd frontend
+npm install
+npm run dev
 ```
 
-Configuração base: [`config/poc.yaml`](config/poc.yaml).  
-Ablação: [`config/quantum_ablation.yaml`](config/quantum_ablation.yaml).  
-Planos: [`PLAN.md`](PLAN.md), [`PLAN_QUANTUM_ABLATION.md`](PLAN_QUANTUM_ABLATION.md).
+Mapa em tela cheia com as 12 estações de Beijing; recomendações por faixa AQI. Só Aotizhongxin tem modelo PoC treinado — demais estações são cenários demo.
 
-## Regras importantes
+## Regras do experimento
 
-- Split estritamente temporal (60/20/20)
-- Threshold do extremo (P90) só no treino
-- Imputer / scaler / PCA / escala angular ajustados só no treino
-- SVM e QSVM usam exatamente o mesmo subset
-- Seleção de configuração quântica **somente na validação**
-- Simulador quântico local ideal (sem hardware)
+- Split temporal 60/20/20
+- Limiar do extremo (P90) só no treino
+- Imputer / scaler / PCA / escala angular só no treino
+- Métrica principal: **AUPRC**
+- Simulador quântico local (sem hardware)
 
-## Artefatos
+## Planos
 
-- PoC original: `artifacts/`
-- Ablação: `artifacts/ablation/` (kernels, ranking, relatório)
-
-## Kaggle
-
-A ablação completa demora horas em CPU. Pacote e instruções em [`kaggle/README_KAGGLE.md`](kaggle/README_KAGGLE.md).
+- [`PLAN.md`](PLAN.md)
+- [`PLAN_QUANTUM_ABLATION.md`](PLAN_QUANTUM_ABLATION.md)

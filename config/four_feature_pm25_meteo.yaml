@@ -1,0 +1,52 @@
+# PM2.5 + temperatura + umidade (DEWP) + pressão
+# Beijing não tem RH; DEWP (ponto de orvalho) é o proxy de umidade.
+
+project:
+  name: four-feature-pm25-meteo
+  random_seed: 42
+
+data:
+  dataset_id: 501
+  station: Aotizhongxin
+  target_column: PM2.5
+  raw_dir: data/raw
+
+forecast:
+  horizon_hours: 24
+  extreme_percentile: 0.90
+
+features:
+  raw_columns:
+    - PM2.5
+    - TEMP
+    - DEWP   # proxy de umidade (não há coluna RH no dataset)
+    - PRES
+  ffill_limit_hours: 3
+  use_lags_rolling: false
+  add_calendar_features: false
+  notes: "DEWP = dew point, used as humidity proxy (no RH column in UCI Beijing)."
+
+split:
+  train_fraction: 0.60
+  validation_fraction: 0.20
+  test_fraction: 0.20
+
+sampling:
+  train_size: 80
+  validation_size: 40
+  test_size: 40
+
+quantum_variants:
+  - id: Q_farooq_like
+    angular_scaler: minmax_0_1
+    feature_map: ZZFeatureMap
+    reps: 1
+    entanglement: linear
+  - id: Q_best_recipe
+    angular_scaler: minmax_0_pi
+    feature_map: ZZFeatureMap
+    reps: 2
+    entanglement: linear
+
+paths:
+  artifacts_dir: artifacts/four_feature

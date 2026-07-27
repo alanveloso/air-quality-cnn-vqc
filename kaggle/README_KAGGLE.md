@@ -1,8 +1,25 @@
-# Rodar a ablação no Kaggle
+# Rodar no Kaggle
+
+## Opção A — Notebook independente (recomendado)
+
+[`notebooks/kaggle_farooq_style_qsvm.ipynb`](../notebooks/kaggle_farooq_style_qsvm.ipynb)
+
+- **Não precisa** anexar zip do repositório
+- Baixa Beijing (UCI) sozinho
+- Features estilo Farooq (min/max/median/variance de PM2.5 e temperatura)
+- Clássicos + QSVM (PCA→2 + MinMax + ZZFeatureMap)
+- Settings: Internet **ON** · Accelerator **None**
+- Amostra padrão pequena (`80/40/40`); aumente na célula de config
+
+1. New Notebook → Upload `kaggle_farooq_style_qsvm.ipynb`
+2. Run All
+3. Baixe `farooq_style_kaggle_results.zip` em Output
+
+## Opção B — Ablação Q01–Q10 (pacote do repo)
 
 Cada configuração de 2 qubits levou ~13 min aqui (CPU). As 10 configs + 4 qubits devem passar de **2–3 h**. No Kaggle (sessão longa / CPU) dá para deixar rodando sem travar a máquina.
 
-## O que já está pronto
+### O que já está pronto
 
 | Arquivo | Uso |
 |---|---|
@@ -20,32 +37,25 @@ Resultados parciais locais (validação):
 
 A escala angular já está ajudando vs o controle sem escala.
 
-## Passo a passo no Kaggle
+### Passo a passo (ablacão)
 
 1. **New Dataset** → upload `qml_air_quality_poc.zip` (nome sugerido: `qml-air-quality-poc`).
    - O Kaggle **extrai o zip automaticamente**. No notebook você verá pastas `src/` e `config/`, não o `.zip`. Isso é esperado.
 2. (Opcional) Outro dataset com `ablation_kernel_cache_q01_q03.zip`.
 3. **New Notebook** → **Add Data** → anexe o(s) dataset(s).
-4. Use o notebook atualizado `notebooks/kaggle_quantum_ablation.ipynb` (detecta zip **ou** pastas já extraídas).
+4. Use o notebook `notebooks/kaggle_quantum_ablation.ipynb`.
 5. Settings: **Internet ON** · Accelerator **None**.
 6. Rode a 1ª célula e confira `Datasets em /kaggle/input:` + `OK código em ...`.
 7. Run All. No fim baixe `ablation_results.zip`.
 
 ### Se der erro "não achei o código"
 
-Na 1ª célula, o print lista o que há em `/kaggle/input`. Confirme que o dataset está em **Input** (barra direita). Se o dataset tiver outro layout, diga o que apareceu no print.
+Na 1ª célula, o print lista o que há em `/kaggle/input`. Confirme que o dataset está em **Input** (barra direita).
 
 ## Depois do Kaggle
 
-Copie de volta para o repo:
-
 ```bash
-# exemplo
+unzip ~/Downloads/farooq_style_kaggle_results.zip -d artifacts/farooq_style/
+# ou, para a ablação:
 unzip ~/Downloads/ablation_kaggle_output.zip -d artifacts/ablation/
-```
-
-Ou rode localmente só o relatório se os CSVs/kernels já estiverem em `artifacts/ablation/`:
-
-```bash
-python -c "from qml_air_quality.reporting.ablation_report import write_ablation_report, plot_ablation_figures as p; print(write_ablation_report()); print(p())"
 ```

@@ -1,0 +1,80 @@
+== prepare ==
+features: ['pm25_min', 'pm25_max', 'pm25_median', 'pm25_variance', 'temperature_min', 'temperature_max', 'temperature_median', 'temperature_variance']
+extreme threshold: 184.0
+
+===== TASK extreme_p90 (target=target) =====
+aqi_band train:
+ aqi_band
+Unhealthy              7957
+Moderate               4220
+Unhealthy_Sensitive    2724
+Very_Unhealthy         2510
+Good                   2271
+Hazardous               865
+pos rate train/test: 0.1014746678347204 0.10570886260767995
+sizes before subsample: 20547 6849 6849
+subsample: 80 40 pos: 8 4
+  dummy: Acc≈0.900 AUPRC=0.100 F1=0.000
+  logistic: Acc≈0.925 AUPRC=0.771 F1=0.667
+  svm_linear: Acc≈0.900 AUPRC=0.667 F1=0.000
+  svm_rbf: Acc≈0.900 AUPRC=0.525 F1=0.000
+  [Q_farooq] building kernel…
+  Q_farooq: AUPRC=0.817 F1=0.667 (14.8s)
+
+===== TASK aqi_bad (target=aqi_bad) =====
+aqi_band train:
+ aqi_band
+Unhealthy              7957
+Moderate               4220
+Unhealthy_Sensitive    2724
+Very_Unhealthy         2510
+Good                   2271
+Hazardous               865
+pos rate train/test: 0.6840901348128681 0.6262228062490874
+sizes before subsample: 20547 6849 6849
+subsample: 80 40 pos: 55 25
+  dummy: Acc≈0.625 AUPRC=0.625 F1=0.769
+  logistic: Acc≈0.500 AUPRC=0.698 F1=0.474
+  svm_linear: Acc≈0.625 AUPRC=0.689 F1=0.769
+  svm_rbf: Acc≈0.625 AUPRC=0.555 F1=0.769
+  [Q_farooq] building kernel…
+  Q_farooq: AUPRC=0.749 F1=0.727 (15.0s)
+
+===== TASK aqi_good_vs_moderate (target=aqi_good_vs_moderate) =====
+aqi_band train:
+ aqi_band
+Unhealthy              7957
+Moderate               4220
+Unhealthy_Sensitive    2724
+Very_Unhealthy         2510
+Good                   2271
+Hazardous               865
+pos rate train/test: 0.6501309505469111 0.5859375
+sizes before subsample: 6491 3077 2560
+subsample: 80 40 pos: 52 23
+  dummy: Acc≈0.575 AUPRC=0.575 F1=0.730
+  logistic: Acc≈0.525 AUPRC=0.608 F1=0.596
+  svm_linear: Acc≈0.550 AUPRC=0.558 F1=0.700
+  svm_rbf: Acc≈0.550 AUPRC=0.682 F1=0.710
+  [Q_farooq] building kernel…
+  Q_farooq: AUPRC=0.640 F1=0.591 (15.0s)
+
+=== ALL TASKS ===
+                task             model  average_precision  f1_extreme    family
+         extreme_p90 Q_farooq_pipeline           0.816667    0.666667      qsvm
+         extreme_p90          logistic           0.770833    0.666667 classical
+         extreme_p90        svm_linear           0.666667    0.000000 classical
+         extreme_p90           svm_rbf           0.525490    0.000000 classical
+         extreme_p90             dummy           0.100000    0.000000 classical
+             aqi_bad Q_farooq_pipeline           0.749246    0.727273      qsvm
+             aqi_bad          logistic           0.698131    0.473684 classical
+             aqi_bad        svm_linear           0.688643    0.769231 classical
+             aqi_bad             dummy           0.625000    0.769231 classical
+             aqi_bad           svm_rbf           0.555288    0.769231 classical
+aqi_good_vs_moderate           svm_rbf           0.681621    0.709677 classical
+aqi_good_vs_moderate Q_farooq_pipeline           0.640489    0.590909      qsvm
+aqi_good_vs_moderate          logistic           0.608294    0.595745 classical
+aqi_good_vs_moderate             dummy           0.575000    0.730159 classical
+aqi_good_vs_moderate        svm_linear           0.558409    0.700000 classical
+
+Artifacts: /home/alanveloso/Código/air-quality/artifacts/aqi_bands_local

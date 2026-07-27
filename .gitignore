@@ -11,28 +11,34 @@ build/
 .ipynb_checkpoints/
 *.egg
 
-# Data & artifacts (keep structure)
+# Data brutos (regeneráveis via download UCI)
 data/raw/*
 !data/raw/.gitkeep
 data/interim/*
 !data/interim/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+
+# Artefatos regeneráveis / pesados
 artifacts/datasets/*
-artifacts/kernels/*
+artifacts/kernels/
 artifacts/models/*
 artifacts/plots/*
 artifacts/reports/*
+artifacts/**/kernels/
+artifacts/ablation/plots/kernel_matrices_by_configuration.png
 !artifacts/**/.gitkeep
 
-# Ablação — kernels e plots grandes (regeneráveis via scripts/run_ablation.py)
-artifacts/ablation/kernels/*.npy
-artifacts/ablation/plots/kernel_matrices_by_configuration.png
+# Frontend
+frontend/node_modules/
+frontend/dist/
 
-# Arquivos pesados / cache
+# Zips / extras
 ablation_results.zip
 bib/
 kaggle/*.zip
+*.pt
+*.pth
 
 # OS / IDE
 .DS_Store

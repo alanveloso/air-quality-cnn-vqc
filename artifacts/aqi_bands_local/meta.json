@@ -1,0 +1,45 @@
+{
+  "extreme_threshold": {
+    "target": "PM2.5",
+    "horizon_hours": 24,
+    "percentile": 0.9,
+    "threshold": 184.0,
+    "threshold_source": "training_partition"
+  },
+  "aqi": {
+    "value_col": "future_pm25",
+    "breakpoints_ugm3": [
+      {
+        "max": 12.0,
+        "band": "Good"
+      },
+      {
+        "max": 35.4,
+        "band": "Moderate"
+      },
+      {
+        "max": 55.4,
+        "band": "Unhealthy_Sensitive"
+      },
+      {
+        "max": 150.4,
+        "band": "Unhealthy"
+      },
+      {
+        "max": 250.4,
+        "band": "Very_Unhealthy"
+      },
+      {
+        "max": null,
+        "band": "Hazardous"
+      }
+    ],
+    "aqi_bad_definition": "1 if band not in {Good, Moderate}",
+    "aqi_good_vs_moderate_definition": "0=Good, 1=Moderate (rows outside dropped by caller)"
+  },
+  "train_size": 80,
+  "test_size": 40,
+  "seed": 42,
+  "skip_quantum": false,
+  "note": "Local smoke: Farooq features + AQI bands (EPA) on future PM2.5 t+24h"
+}

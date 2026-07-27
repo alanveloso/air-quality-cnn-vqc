@@ -1,0 +1,23 @@
+{
+  "seed": 42,
+  "features": [
+    "pm25_min",
+    "pm25_max",
+    "pm25_median",
+    "pm25_variance",
+    "temperature_min",
+    "temperature_max",
+    "temperature_median",
+    "temperature_variance"
+  ],
+  "n_features": 8,
+  "mode": "farooq_stats",
+  "pca_for_quantum": 2,
+  "threshold": 184.0,
+  "train_size": 80,
+  "val_size": 40,
+  "test_size": 40,
+  "positives_train": 8,
+  "positives_test": 4,
+  "feature_notes": "Farooq-style min/max/median/variance for PM2.5 and temperature (24h causal rolling)."
+}
