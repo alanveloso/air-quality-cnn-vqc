@@ -1,0 +1,7 @@
+{
+  "target": "PM2.5",
+  "horizon_hours": 24,
+  "percentile": 0.9,
+  "threshold": 184.0,
+  "threshold_source": "training_partition"
+}

@@ -1,0 +1,62 @@
+{
+  "selection": {
+    "best_qsvm_id": "Q06",
+    "best_qsvm_val_auprc": 0.5326708842046494,
+    "best_classical_paired": "svm_rbf",
+    "best_classical_paired_pca": 4,
+    "best_classical_paired_val_auprc": 0.45108421844262653,
+    "control_id": "Q10",
+    "seed": 42,
+    "note": "Selection used validation only; test not consulted."
+  },
+  "bootstrap": {
+    "delta_mean": -0.04571140705530314,
+    "delta_std": 0.08428816064241093,
+    "ci_low": -0.20985578645760927,
+    "ci_high": 0.11860546635085381,
+    "n_boot_effective": 1000
+  },
+  "classification": {
+    "label": "BETTER_QUANTUM_REPRESENTATION_WITHOUT_ADVANTAGE",
+    "conclusion": "A adapta\u00e7\u00e3o angular tornou o kernel mais informativo que o controle/Dummy, mas o ganho n\u00e3o foi suficiente para superar kernels cl\u00e1ssicos equivalentes."
+  },
+  "best_qsvm_test": {
+    "model": "qsvm_Q06",
+    "average_precision": 0.3317254017394509,
+    "balanced_accuracy": 0.75512104283054,
+    "precision_extreme": 0.3333333333333333,
+    "recall_extreme": 0.6666666666666666,
+    "f1_extreme": 0.4444444444444444,
+    "mcc": 0.38402478200944373,
+    "auroc": 0.7584463953179036,
+    "training_seconds": 0.007199634001153754,
+    "inference_seconds": 0.0027887349970114883,
+    "id": "Q06",
+    "pca_components": 2,
+    "angular_scaler": "minmax_0_pi",
+    "feature_map": "ZZFeatureMap",
+    "reps": 2,
+    "alignment": 0.5475291979464036,
+    "effective_rank": 15.086844145664879,
+    "delta_k": 0.05666736215530599,
+    "split": "test",
+    "family": "qsvm"
+  },
+  "best_classical_test": {
+    "model": "svm_rbf",
+    "average_precision": 0.3780011131829573,
+    "balanced_accuracy": 0.5,
+    "precision_extreme": 0.0,
+    "recall_extreme": 0.0,
+    "f1_extreme": 0.0,
+    "mcc": 0.0,
+    "auroc": 0.8073955839318967,
+    "training_seconds": 0.04426701500051422,
+    "inference_seconds": 0.02788746799706132,
+    "id": "classical_svm_rbf_pca4",
+    "pca_components": 4,
+    "angular_scaler": "none",
+    "split": "test",
+    "family": "classical_paired"
+  }
+}

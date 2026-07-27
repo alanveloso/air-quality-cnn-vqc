@@ -1,0 +1,112 @@
+project:
+  name: quantum-angular-ablation
+  seeds: [42]
+
+data:
+  station: Aotizhongxin
+  forecast_horizon_hours: 24
+  extreme_percentile: 0.90
+  config_ref: config/poc.yaml
+
+sampling:
+  train_size: 500
+  validation_size: 150
+  test_size: 200
+
+dimensionality:
+  pca_components: [2, 4]
+
+angular_scalers:
+  - name: none
+  - name: minmax_0_1
+    minimum: 0.0
+    maximum: 1.0
+  - name: minmax_0_pi
+    minimum: 0.0
+    maximum: 3.141592653589793
+  - name: minmax_minus_pi_pi
+    minimum: -3.141592653589793
+    maximum: 3.141592653589793
+  - name: quantile_0_pi
+    n_quantiles: 100
+
+quantum_configs:
+  - id: Q01
+    pca_components: 2
+    angular_scaler: none
+    feature_map: ZZFeatureMap
+    reps: 1
+    entanglement: linear
+  - id: Q02
+    pca_components: 2
+    angular_scaler: minmax_0_1
+    feature_map: ZZFeatureMap
+    reps: 1
+    entanglement: linear
+  - id: Q03
+    pca_components: 2
+    angular_scaler: minmax_0_pi
+    feature_map: ZZFeatureMap
+    reps: 1
+    entanglement: linear
+  - id: Q04
+    pca_components: 2
+    angular_scaler: minmax_minus_pi_pi
+    feature_map: ZZFeatureMap
+    reps: 1
+    entanglement: linear
+  - id: Q05
+    pca_components: 2
+    angular_scaler: quantile_0_pi
+    feature_map: ZZFeatureMap
+    reps: 1
+    entanglement: linear
+  - id: Q06
+    pca_components: 2
+    angular_scaler: minmax_0_pi
+    feature_map: ZZFeatureMap
+    reps: 2
+    entanglement: linear
+  - id: Q07
+    pca_components: 2
+    angular_scaler: minmax_0_pi
+    feature_map: ZFeatureMap
+    reps: 1
+    entanglement: none
+  - id: Q08
+    pca_components: 4
+    angular_scaler: minmax_0_pi
+    feature_map: ZZFeatureMap
+    reps: 1
+    entanglement: linear
+  - id: Q09
+    pca_components: 4
+    angular_scaler: minmax_0_pi
+    feature_map: ZZFeatureMap
+    reps: 2
+    entanglement: linear
+  - id: Q10
+    pca_components: 4
+    angular_scaler: none
+    feature_map: ZZFeatureMap
+    reps: 2
+    entanglement: linear
+
+evaluation:
+  primary_metric: average_precision
+  bootstrap_iterations: 1000
+  confidence_level: 0.95
+  min_auprc_delta: 0.02
+
+kernel_diagnostics:
+  calculate_alignment: true
+  calculate_effective_rank: true
+  calculate_class_contrast: true
+  calculate_eigenvalues: true
+
+paths:
+  artifacts_dir: artifacts
+  ablation_dir: artifacts/ablation
+  kernels_dir: artifacts/ablation/kernels
+  plots_dir: artifacts/ablation/plots
+  reports_dir: artifacts/ablation/reports

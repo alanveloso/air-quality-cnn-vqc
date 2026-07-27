@@ -1,0 +1,10 @@
+{
+  "best_qsvm_id": "Q06",
+  "best_qsvm_val_auprc": 0.5326708842046494,
+  "best_classical_paired": "svm_rbf",
+  "best_classical_paired_pca": 4,
+  "best_classical_paired_val_auprc": 0.45108421844262653,
+  "control_id": "Q10",
+  "seed": 42,
+  "note": "Selection used validation only; test not consulted."
+}

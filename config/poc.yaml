@@ -1,0 +1,74 @@
+project:
+  name: qml-air-quality-poc
+  random_seed: 42
+
+data:
+  dataset_id: 501
+  station: Aotizhongxin
+  target_column: PM2.5
+  timestamp_column: timestamp
+  raw_dir: data/raw
+
+forecast:
+  horizon_hours: 24
+  extreme_percentile: 0.90
+
+features:
+  raw_columns:
+    - PM2.5
+    - PM10
+    - SO2
+    - NO2
+    - CO
+    - O3
+    - TEMP
+    - PRES
+    - DEWP
+    - RAIN
+    - WSPM
+  rolling_windows: [6, 24]
+  lag_hours: [1, 6, 12, 24]
+  add_calendar_features: true
+  pca_components: 4
+  ffill_limit_hours: 3
+
+split:
+  train_fraction: 0.60
+  validation_fraction: 0.20
+  test_fraction: 0.20
+
+sampling:
+  quantum_train_size: 500
+  quantum_validation_size: 150
+  quantum_test_size: 200
+
+classical_models:
+  dummy:
+    strategy: prior
+  logistic_regression:
+    class_weight: balanced
+    max_iter: 2000
+  linear_svm:
+    kernel: linear
+    class_weight: balanced
+    probability: true
+  rbf_svm:
+    kernel: rbf
+    class_weight: balanced
+    probability: true
+    C: 1.0
+    gamma: scale
+
+quantum:
+  feature_map: ZZFeatureMap
+  repetitions: 2
+  entanglement: linear
+  enforce_psd: true
+  cache_kernel: true
+
+paths:
+  artifacts_dir: artifacts
+  datasets_dir: artifacts/datasets
+  kernels_dir: artifacts/kernels
+  models_dir: artifacts/models
+  plots_dir: artifacts/plots

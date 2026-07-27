@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qml-air-quality"
+version = "0.1.0"
+description = "Notebook PoC: classical vs QSVM for Beijing PM2.5 extreme episodes"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pandas>=2.0",
+  "numpy>=1.24",
+  "scikit-learn>=1.3",
+  "matplotlib>=3.7",
+  "qiskit>=1.0",
+  "qiskit-machine-learning>=0.8",
+  "qiskit-aer>=0.14",
+  "pyyaml>=6.0",
+  "joblib>=1.3",
+  "ipykernel>=6.0",
+  "jupyter>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "ruff>=0.4"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
