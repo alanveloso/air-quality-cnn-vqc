@@ -25,6 +25,15 @@ artifacts/plots/*
 artifacts/reports/*
 !artifacts/**/.gitkeep
 
+# Ablação — kernels e plots grandes (regeneráveis via scripts/run_ablation.py)
+artifacts/ablation/kernels/*.npy
+artifacts/ablation/plots/kernel_matrices_by_configuration.png
+
+# Arquivos pesados / cache
+ablation_results.zip
+bib/
+kaggle/*.zip
+
 # OS / IDE
 .DS_Store
 .idea/
