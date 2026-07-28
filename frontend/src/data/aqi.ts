@@ -1,3 +1,5 @@
+import { POC, DEMO_CITY } from './benchmark';
+
 export type AqiBand =
   | 'Good'
   | 'Moderate'
@@ -17,16 +19,17 @@ export interface BandInfo {
   summary: string;
   actions: string[];
   avoid: string[];
-  /** Modelo sugerido nesta PoC (honesto, com base nos smokes locais) */
+  /** Modelo apresentado na UI (demo — sem inferência live) */
   preferredModel: ModelId;
   modelWhy: string;
 }
 
 export const STATION = {
-  name: 'Aotizhongxin',
-  city: 'Beijing',
-  lat: 39.982,
-  lon: 116.397,
+  name: POC.demoStation,
+  city: DEMO_CITY.name,
+  state: DEMO_CITY.state,
+  lat: DEMO_CITY.lat,
+  lon: DEMO_CITY.lon,
 };
 
 export const MODEL_LABEL: Record<ModelId, string> = {
@@ -34,6 +37,9 @@ export const MODEL_LABEL: Record<ModelId, string> = {
   logreg: 'Regressão logística',
   svm_rbf: 'SVM RBF',
 };
+
+const DEMO_WHY =
+  'PoC Farooq-style: a Névoa apresenta o QSVM como modelo da experiência em Recife (cenário fictício).';
 
 /** Faixas EPA (µg/m³) + recomendações práticas */
 export const BANDS: BandInfo[] = [
@@ -50,8 +56,8 @@ export const BANDS: BandInfo[] = [
       'Bom momento para exercício externo',
     ],
     avoid: ['Não há restrições relevantes'],
-    preferredModel: 'svm_rbf',
-    modelWhy: 'No smoke Good vs Moderate, SVM RBF teve melhor AUPRC.',
+    preferredModel: POC.demoModelId,
+    modelWhy: DEMO_WHY,
   },
   {
     id: 'Moderate',
@@ -66,8 +72,8 @@ export const BANDS: BandInfo[] = [
       'Acompanhar a previsão das próximas 24 h',
     ],
     avoid: ['Exercício intenso prolongado se houver sintomas respiratórios'],
-    preferredModel: 'svm_rbf',
-    modelWhy: 'Mesma faixa binária Good/Moderate — SVM RBF foi o melhor clássico no smoke.',
+    preferredModel: POC.demoModelId,
+    modelWhy: DEMO_WHY,
   },
   {
     id: 'Unhealthy_Sensitive',
@@ -82,8 +88,8 @@ export const BANDS: BandInfo[] = [
       'Usar máscara PFF2/N95 em trajetos longos',
     ],
     avoid: ['Corrida/treino intenso ao ar livre para sensíveis'],
-    preferredModel: 'qsvm',
-    modelWhy: 'No alvo aqi_bad (pior que Moderado), QSVM liderou AUPRC no smoke.',
+    preferredModel: POC.demoModelId,
+    modelWhy: DEMO_WHY,
   },
   {
     id: 'Unhealthy',
@@ -98,8 +104,8 @@ export const BANDS: BandInfo[] = [
       'Manter janelas fechadas; usar purificador se houver',
     ],
     avoid: ['Exercício ao ar livre', 'Exposição prolongada em vias congestionadas'],
-    preferredModel: 'qsvm',
-    modelWhy: 'QSVM teve melhor AUPRC no alvo aqi_bad (faixas acima de Moderado).',
+    preferredModel: POC.demoModelId,
+    modelWhy: DEMO_WHY,
   },
   {
     id: 'Very_Unhealthy',
@@ -114,8 +120,8 @@ export const BANDS: BandInfo[] = [
       'Ambientes fechados com filtragem; hidratação',
     ],
     avoid: ['Qualquer exercício externo', 'Abrir janelas por longos períodos'],
-    preferredModel: 'qsvm',
-    modelWhy: 'Sobreposição com extremos de PM2.5 — QSVM liderou AUPRC no extremo P90.',
+    preferredModel: POC.demoModelId,
+    modelWhy: DEMO_WHY,
   },
   {
     id: 'Hazardous',
@@ -130,8 +136,8 @@ export const BANDS: BandInfo[] = [
       'Procure orientação de saúde se houver falta de ar',
     ],
     avoid: ['Toda atividade externa', 'Ventilação natural sem filtragem'],
-    preferredModel: 'qsvm',
-    modelWhy: 'Alinha com extremos (≥ P90 ~184 µg/m³) — QSVM melhor AUPRC no smoke.',
+    preferredModel: POC.demoModelId,
+    modelWhy: DEMO_WHY,
   },
 ];
 

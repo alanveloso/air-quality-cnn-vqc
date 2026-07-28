@@ -1,0 +1,52 @@
+{
+  "config_path": "config/farooq_fair_benchmark.yaml",
+  "stage": "all",
+  "skip_quantum": false,
+  "overrides": {
+    "experiment": {
+      "selection_seeds": [
+        42
+      ],
+      "final_seeds": [
+        42
+      ]
+    },
+    "sampling": {
+      "train_sizes": [
+        80
+      ],
+      "validation_size": 40,
+      "test_size": 40
+    },
+    "evaluation": {
+      "bootstrap_iterations": 200
+    },
+    "paths": {
+      "artifacts_dir": "artifacts/farooq_fair_benchmark_small"
+    }
+  },
+  "sampling": {
+    "train_sizes": [
+      80
+    ],
+    "validation_size": 40,
+    "test_size": 40,
+    "evaluation_seed": 2026,
+    "fixed_validation": true,
+    "fixed_test": true
+  },
+  "experiment_seeds": {
+    "selection": [
+      42
+    ],
+    "final": [
+      42
+    ]
+  },
+  "evaluation": {
+    "primary_metric": "average_precision",
+    "bootstrap_iterations": 200,
+    "bootstrap_block_hours": 24
+  },
+  "artifacts_dir": "artifacts/farooq_fair_benchmark_small"
+}

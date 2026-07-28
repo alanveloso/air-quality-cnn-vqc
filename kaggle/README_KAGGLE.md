@@ -14,6 +14,7 @@
 1. New Notebook → Upload `kaggle_farooq_style_qsvm.ipynb`
 2. Run All
 3. Baixe `farooq_style_kaggle_results.zip` em Output
+4. Extraia para `artifacts/farooq_style/kaggle_medium/` (ver [`artifacts/farooq_style/README.md`](../artifacts/farooq_style/README.md))
 
 ## Opção B — Ablação Q01–Q10 (pacote do repo)
 

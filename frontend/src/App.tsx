@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { BANDS, MODEL_LABEL, bandById, type AqiBand } from './data/aqi';
+import { POC, DEMO_CITY } from './data/benchmark';
 import { DEFAULT_STATION_ID, STATIONS, stationById, type Station } from './data/stations';
 import './App.css';
 
@@ -31,8 +32,8 @@ export default function App() {
   return (
     <div className="map-app">
       <MapContainer
-        center={[39.95, 116.4]}
-        zoom={10}
+        center={[DEMO_CITY.lat, DEMO_CITY.lon]}
+        zoom={11}
         className="map-full"
         scrollWheelZoom
         zoomControl={false}
@@ -77,7 +78,9 @@ export default function App() {
       {/* Brand overlay — leve, não compete com o mapa */}
       <header className="overlay-brand">
         <p className="brand">Névoa</p>
-        <p className="brand-sub">Beijing · 12 estações</p>
+        <p className="brand-sub">
+          {DEMO_CITY.name}, {DEMO_CITY.state} · {STATIONS.length} pontos
+        </p>
       </header>
 
       {/* Status flutuante */}
@@ -91,7 +94,7 @@ export default function App() {
         </p>
         <p className="overlay-status__meta">
           PM2.5 {band.pm25} · t+24h
-          {station.hasTrainedModel ? ' · modelo PoC' : ' · demo'}
+          {station.hasTrainedModel ? ` · ${POC.demoModelLabel} (demo)` : ' · demo'}
         </p>
       </div>
 
@@ -133,7 +136,7 @@ export default function App() {
             <p className="lede">{band.summary}</p>
 
             <div className="model-chip">
-              <span>Modelo sugerido</span>
+              <span>Modelo em uso (demo)</span>
               <strong>{MODEL_LABEL[band.preferredModel]}</strong>
               <small>{band.modelWhy}</small>
             </div>
@@ -173,7 +176,8 @@ export default function App() {
               ))}
             </div>
             <p className="fineprint">
-              Clique nos pontos do mapa. Cenários demo — só Aotizhongxin tem modelo treinado.
+              {POC.demoNote} {POC.correlationNote} Treino: {POC.trainingStation} (
+              {POC.trainingDataset}).
             </p>
           </div>
         )}

@@ -1,0 +1,30 @@
+{
+  "purge_hours": 24,
+  "validation_start": "2015-07-29 00:00:00",
+  "test_start": "2016-05-16 08:00:00",
+  "train_rows_before": 20547,
+  "train_rows_after": 20523,
+  "train_rows_removed": 24,
+  "validation_rows_before": 6849,
+  "validation_rows_after": 6825,
+  "validation_rows_removed": 24,
+  "test_rows": 6849,
+  "train_target_timestamp_max": "2015-07-28 23:00:00",
+  "validation_target_timestamp_max": "2016-05-16 07:00:00",
+  "station": "Aotizhongxin",
+  "n_rows_after_dropna": 34245,
+  "feature_columns": [
+    "pm25_min",
+    "pm25_max",
+    "pm25_median",
+    "pm25_variance",
+    "temperature_min",
+    "temperature_max",
+    "temperature_median",
+    "temperature_variance"
+  ],
+  "train_size_full": 20523,
+  "validation_size_full": 6825,
+  "test_size_full": 6849,
+  "train_positive_rate": 0.10008283389368026
+}

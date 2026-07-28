@@ -1,0 +1,17 @@
+{
+  "station": "Aotizhongxin",
+  "features": [
+    "pm25_min",
+    "pm25_max",
+    "pm25_median",
+    "pm25_variance",
+    "temperature_min",
+    "temperature_max",
+    "temperature_median",
+    "temperature_variance"
+  ],
+  "n_train": 20523,
+  "n_validation": 6825,
+  "n_test": 6849,
+  "threshold": 185.0
+}

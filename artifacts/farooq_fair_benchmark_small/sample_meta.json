@@ -1,0 +1,7 @@
+{
+  "evaluation_seed": 2026,
+  "validation_size": 40,
+  "test_size": 40,
+  "fixed_validation": true,
+  "fixed_test": true
+}

@@ -1,0 +1,113 @@
+{
+  "selection_split": "validation",
+  "models": [
+    {
+      "model_id": "logistic_full_8d",
+      "val_auprc": 0.3367204969,
+      "val_recall_extreme": 0.864,
+      "C": 1.0,
+      "class_weight": "balanced",
+      "gamma": null,
+      "angular_scaler": null,
+      "reps": null,
+      "group": "full",
+      "threshold": -0.7367867437
+    },
+    {
+      "model_id": "logistic_pca2_0_1",
+      "val_auprc": 0.2803677155,
+      "val_recall_extreme": 0.824,
+      "C": 0.1,
+      "class_weight": "balanced",
+      "gamma": null,
+      "angular_scaler": "minmax_0_1",
+      "reps": null,
+      "group": "paired",
+      "threshold": -2.1897033805
+    },
+    {
+      "model_id": "logistic_pca2_0_pi",
+      "val_auprc": 0.2783533756,
+      "val_recall_extreme": 0.84,
+      "C": 0.1,
+      "class_weight": "balanced",
+      "gamma": null,
+      "angular_scaler": "minmax_0_pi",
+      "reps": null,
+      "group": "paired",
+      "threshold": -2.0438203679
+    },
+    {
+      "model_id": "svm_linear_full_8d",
+      "val_auprc": 0.3543073061,
+      "val_recall_extreme": 0.816,
+      "C": 0.1,
+      "class_weight": "balanced",
+      "gamma": null,
+      "angular_scaler": null,
+      "reps": null,
+      "group": "full",
+      "threshold": -0.7110829264
+    },
+    {
+      "model_id": "svm_linear_pca2_0_1",
+      "val_auprc": 0.3043133466,
+      "val_recall_extreme": 0.816,
+      "C": 0.1,
+      "class_weight": "balanced",
+      "gamma": null,
+      "angular_scaler": "minmax_0_1",
+      "reps": null,
+      "group": "paired",
+      "threshold": -0.482650384
+    },
+    {
+      "model_id": "svm_linear_pca2_0_pi",
+      "val_auprc": 0.2991888084,
+      "val_recall_extreme": 0.84,
+      "C": 1.0,
+      "class_weight": "balanced",
+      "gamma": null,
+      "angular_scaler": "minmax_0_pi",
+      "reps": null,
+      "group": "paired",
+      "threshold": -0.4827007985
+    },
+    {
+      "model_id": "svm_rbf_full_8d",
+      "val_auprc": 0.4849268678,
+      "val_recall_extreme": 0.856,
+      "C": 0.1,
+      "class_weight": "balanced",
+      "gamma": "scale",
+      "angular_scaler": null,
+      "reps": null,
+      "group": "full",
+      "threshold": -0.1746725451
+    },
+    {
+      "model_id": "svm_rbf_pca2_0_1",
+      "val_auprc": 0.4187459337,
+      "val_recall_extreme": 0.848,
+      "C": 1.0,
+      "class_weight": "balanced",
+      "gamma": 1.0,
+      "angular_scaler": "minmax_0_1",
+      "reps": null,
+      "group": "paired",
+      "threshold": -0.1432593143
+    },
+    {
+      "model_id": "svm_rbf_pca2_0_pi",
+      "val_auprc": 0.4199205776,
+      "val_recall_extreme": 0.848,
+      "C": 1.0,
+      "class_weight": "balanced",
+      "gamma": 0.1,
+      "angular_scaler": "minmax_0_pi",
+      "reps": null,
+      "group": "paired",
+      "threshold": -0.1408809128
+    }
+  ]
+}

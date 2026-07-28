@@ -37,6 +37,7 @@ frontend/dist/
 ablation_results.zip
 bib/
 kaggle/*.zip
+artifacts/farooq_style/kaggle_medium_results.zip
 *.pt
 *.pth
 

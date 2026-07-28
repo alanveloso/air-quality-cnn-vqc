@@ -2,18 +2,22 @@
 
 PoC de **machine learning quântico** para previsão (t+24h) de episódios extremos de PM2.5 na estação **Aotizhongxin** (Beijing Multi-Site, UCI 501), com comparação clássico vs QSVM, ablação angular, notebook Kaggle e frontend **Névoa**.
 
+Repositório: [`github.com/alanveloso/qml-air-quality`](https://github.com/alanveloso/qml-air-quality) · Demo (GitHub Pages): [`alanveloso.github.io/qml-air-quality`](https://alanveloso.github.io/qml-air-quality/)
+
 ## Estrutura
 
 ```text
 src/qml_air_quality/   # biblioteca (dados, features, modelos, ablação)
-config/                # poc.yaml, quantum_ablation.yaml, farooq_style_stats.yaml, …
-scripts/               # smoke_run, run_ablation, farooq/aqi experiments
-notebooks/             # PoC 01–04 + Kaggle (Farooq / ablação)
-frontend/              # Névoa — mapa das 12 estações + recomendações AQI
-artifacts/             # resultados leves (CSV/JSON/plots)
+config/                # poc.yaml, farooq_style_stats.yaml, …
+scripts/               # smoke_run, farooq experiments
+notebooks/             # PoC + Kaggle Farooq-style
+frontend/              # Névoa — demo UI (representa QSVM; sem inferência live)
+artifacts/farooq_style/  # resultados (kaggle_medium/ + local_small/)
 kaggle/                # instruções Kaggle
 tests/
 ```
+
+Resultados: [`artifacts/farooq_style/`](artifacts/farooq_style/README.md).
 
 ## Setup Python
 
@@ -49,7 +53,9 @@ npm install
 npm run dev
 ```
 
-Mapa em tela cheia com as 12 estações de Beijing; recomendações por faixa AQI. Só Aotizhongxin tem modelo PoC treinado — demais estações são cenários demo.
+Mapa em tela cheia com as 12 estações de Beijing; recomendações por faixa AQI. A interface **apresenta o QSVM Farooq como modelo da PoC** (demo) — não executa predição. Artefatos de referência: `artifacts/farooq_style/kaggle_medium/`.
+
+Deploy automático via GitHub Actions (`.github/workflows/pages.yml`) ao push em `main`/`master` com mudanças em `frontend/`. Em **Settings → Pages**, use source **GitHub Actions**.
 
 ## Regras do experimento
 

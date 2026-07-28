@@ -1,0 +1,88 @@
+# Fair methodological benchmark (Farooq-style features, paired PCA-2).
+# Legacy experiment remains in config/farooq_style_stats.yaml.
+
+experiment:
+  name: farooq_style_fair_benchmark
+  horizon_hours: 24
+  extreme_percentile: 0.90
+  selection_seeds: [7, 11, 13, 21, 42]
+  final_seeds: [7, 11, 13, 21, 42, 77, 101, 123, 314, 2026]
+
+project:
+  random_seed: 42
+
+data:
+  dataset_id: 501
+  station: Aotizhongxin
+  target_column: PM2.5
+  raw_dir: data/raw
+  purge_hours: 24
+
+features:
+  mode: farooq_stats
+  source_columns:
+    PM2.5: pm25
+    TEMP: temperature
+  stats: [min, max, median, variance]
+  rolling_window_hours: 24
+  rolling_min_periods: 12
+  ffill_limit_hours: 3
+
+split:
+  train_fraction: 0.60
+  validation_fraction: 0.20
+  test_fraction: 0.20
+
+sampling:
+  train_sizes: [200, 500]
+  validation_size: 200
+  test_size: 300
+  evaluation_seed: 2026
+  fixed_validation: true
+  fixed_test: true
+
+representation:
+  full:
+    enabled: true
+    dimensions: 8
+  paired:
+    pca_components: 2
+    angular_ranges:
+      - minmax_0_1
+      - minmax_0_pi
+
+classical:
+  logistic:
+    C: [0.1, 1.0, 10.0]
+    class_weight: [null, balanced]
+  svm_linear:
+    C: [0.1, 1.0, 10.0]
+    class_weight: [null, balanced]
+  svm_rbf:
+    C: [0.1, 1.0, 10.0]
+    gamma: [scale, 0.1, 1.0]
+    class_weight: [null, balanced]
+
+quantum:
+  feature_map: ZZFeatureMap
+  qubits: 2
+  reps: [1, 2]
+  angular_scalers:
+    - minmax_0_1
+    - minmax_0_pi
+  entanglement: linear
+  C: [0.1, 1.0, 10.0]
+  class_weight: [null, balanced]
+  cache_kernels: true
+
+threshold:
+  metric: f2
+  select_on: validation
+
+evaluation:
+  primary_metric: average_precision
+  bootstrap_iterations: 1000
+  bootstrap_block_hours: 24
+
+paths:
+  artifacts_dir: artifacts/farooq_fair_benchmark

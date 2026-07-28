@@ -1,0 +1,14 @@
+model_family,C,class_weight,val_auprc,val_recall_extreme,selection_split,threshold,val_f2,frozen,model_id,group,seed,train_size,angular_scaler,reps,gamma,feature_map,entanglement,quantum_id,farooq_style,kernel_seconds
+logistic,0.1,,0.41428571428571426,0.8,validation,-1.9032605960073714,0.6666666666666666,True,logistic_full_8d,full,42,80,,,,,,,,
+svm_linear,10.0,,0.4990476190476191,0.8,validation,-0.8094363817127423,0.6666666666666666,True,svm_linear_full_8d,full,42,80,,,,,,,,
+svm_rbf,0.1,balanced,0.7560606060606061,1.0,validation,-0.20491556608557437,0.78125,True,svm_rbf_full_8d,full,42,80,,,scale,,,,,
+logistic,10.0,balanced,0.4026330532212885,1.0,validation,-0.33265971998520827,0.6756756756756757,True,logistic_pca2_0_1,paired,42,80,minmax_0_1,,,,,,,
+svm_linear,0.1,,0.41555555555555557,0.8,validation,-0.9999518630505744,0.6896551724137931,True,svm_linear_pca2_0_1,paired,42,80,minmax_0_1,,,,,,,
+svm_rbf,10.0,balanced,0.7091575091575091,0.6,validation,1.3752607072079917,0.6521739130434783,True,svm_rbf_pca2_0_1,paired,42,80,minmax_0_1,,1.0,,,,,
+qsvm,1.0,balanced,0.38888888888888884,1.0,validation,-0.2603881570353032,0.6578947368421053,True,qsvm_pca2_0_1_reps1,paired,42,80,minmax_0_1,1.0,,ZZFeatureMap,linear,Q01,False,15.501374080999994
+qsvm,10.0,balanced,0.24730158730158727,0.8,validation,0.05273962783276276,0.5714285714285714,True,qsvm_pca2_0_1_reps2,paired,42,80,minmax_0_1,2.0,,ZZFeatureMap,linear,Q02,True,16.820783063999897
+logistic,1.0,balanced,0.4026330532212885,1.0,validation,-0.3329006118198749,0.6756756756756757,True,logistic_pca2_0_pi,paired,42,80,minmax_0_pi,,,,,,,
+svm_linear,0.1,balanced,0.40249999999999997,1.0,validation,-0.31768945467764076,0.6944444444444444,True,svm_linear_pca2_0_pi,paired,42,80,minmax_0_pi,,,,,,,
+svm_rbf,10.0,balanced,0.7091575091575091,0.6,validation,1.3712460108729232,0.6521739130434783,True,svm_rbf_pca2_0_pi,paired,42,80,minmax_0_pi,,0.1,,,,,
+qsvm,0.1,,0.13886274509803923,1.0,validation,-1.0074114848672961,0.44642857142857145,True,qsvm_pca2_0_pi_reps1,paired,42,80,minmax_0_pi,1.0,,ZZFeatureMap,linear,Q03,False,15.78596965900033
+qsvm,1.0,balanced,0.13337164750957853,1.0,validation,-0.6679254780499859,0.5102040816326531,True,qsvm_pca2_0_pi_reps2,paired,42,80,minmax_0_pi,2.0,,ZZFeatureMap,linear,Q04,False,17.0643613430002

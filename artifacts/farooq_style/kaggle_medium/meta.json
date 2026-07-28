@@ -1,0 +1,57 @@
+{
+  "mode": "medium",
+  "seeds": [
+    42,
+    7,
+    11,
+    13,
+    21
+  ],
+  "n_seeds": 5,
+  "primary_seed": 42,
+  "station": "Aotizhongxin",
+  "features": [
+    "pm25_min",
+    "pm25_max",
+    "pm25_median",
+    "pm25_variance",
+    "temperature_min",
+    "temperature_max",
+    "temperature_median",
+    "temperature_variance"
+  ],
+  "threshold": 184.0,
+  "train_size": 200,
+  "val_size": 60,
+  "test_size": 80,
+  "pca_qubits": 2,
+  "q_variants": [
+    [
+      "Q_farooq_pipeline",
+      "minmax_0_1",
+      1
+    ],
+    [
+      "Q_farooq_0pi",
+      "minmax_0_pi",
+      2
+    ]
+  ],
+  "elapsed_minutes": 27.397769518583335,
+  "estimated_minutes": 25.790000000000003,
+  "wilcoxon": {
+    "qsvm": "Q_farooq_pipeline",
+    "classical": "logistic",
+    "metric": "average_precision",
+    "delta_mean": -0.012204330858203171,
+    "n_seeds": 5,
+    "wins_qsvm": 2,
+    "wins_classical": 3,
+    "ties": 0,
+    "wilcoxon_stat": 7.0,
+    "p_value": 1.0,
+    "significant_0_05": false
+  },
+  "best_mean_auprc_model": "logistic",
+  "note": "Farooq-style stats; temporal split fixed; stratified subsample varies by seed; multi-seed evaluation"
+}
