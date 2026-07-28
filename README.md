@@ -55,7 +55,9 @@ npm run dev
 
 Mapa em tela cheia com as 12 estações de Beijing; recomendações por faixa AQI. A interface **apresenta o QSVM Farooq como modelo da PoC** (demo) — não executa predição. Artefatos de referência: `artifacts/farooq_style/kaggle_medium/`.
 
-Deploy automático via GitHub Actions (`.github/workflows/pages.yml`) ao push em `main`/`master` com mudanças em `frontend/`. Em **Settings → Pages**, use source **GitHub Actions**.
+Deploy automático via GitHub Actions (`.github/workflows/pages.yml`) ao push em `main`/`master` com mudanças em `frontend/`.
+
+**Antes do primeiro deploy:** em **Settings → Pages → Build and deployment**, escolha **Source: GitHub Actions** (não “Deploy from a branch”). Depois reexecute o workflow em **Actions → Deploy Névoa → Run workflow**.
 
 ## Regras do experimento
 
